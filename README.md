@@ -1,6 +1,13 @@
 # react-native-expressive
 
+<!-- BADGES -->
+[![](https://badgen.net/github/license/thehale/react-native-expressive)](https://github.com/thehale/react-native-expressive/blob/master/LICENSE)
+[![](https://badgen.net/badge/icon/Sponsor/pink?icon=github&label)](https://github.com/sponsors/thehale)
+[![Joseph Hale's software engineering blog](https://jhale.dev/badges/website.svg)](https://jhale.dev)
+[![](https://jhale.dev/badges/follow.svg)](https://www.linkedin.com/comm/mynetwork/discovery-see-all?usecase=PEOPLE_FOLLOWS&followMember=thehale)
+
 Utilities and UI components for cross-platform React Native apps
+
 
 ## Installation
 
