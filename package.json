@@ -38,7 +38,7 @@
     "lint": "eslint \"**/*.{js,ts,tsx}\"",
     "clean": "del-cli lib",
     "prepare": "bob build",
-    "release": "release-it --only-version"
+    "release": "yarn prepare && release-it --only-version"
   },
   "keywords": [
     "react-native",
@@ -116,8 +116,9 @@
     "plugins": {
       "@release-it/conventional-changelog": {
         "preset": {
-          "name": "angular"
-        }
+          "name": "conventionalcommits"
+        },
+        "infile": "CHANGELOG.md"
       }
     }
   },
