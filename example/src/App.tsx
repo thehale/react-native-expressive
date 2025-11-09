@@ -1,20 +1,28 @@
-import { Text, View, StyleSheet } from 'react-native';
-import { multiply } from 'react-native-expressive';
-
-const result = multiply(3, 7);
+import { StyleSheet, ScrollView } from 'react-native';
+import Buttons from './Buttons';
+import Typography from './Typography';
+import Themes from './Themes';
+import { useMaterialTheme } from 'react-native-expressive';
+import { Divider } from 'react-native-expressive';
 
 export default function App() {
+  const { theme } = useMaterialTheme();
   return (
-    <View style={styles.container}>
-      <Text>Result: {result}</Text>
-    </View>
+    <ScrollView
+      style={[styles.container, { backgroundColor: theme.colors.background }]}
+    >
+      <Themes />
+      <Divider />
+      <Buttons />
+      <Divider />
+      <Typography />
+    </ScrollView>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
+    padding: 16,
   },
 });
