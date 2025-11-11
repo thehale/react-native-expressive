@@ -9,37 +9,6 @@ import type { ThemeColors, ThemeDefinition } from '../types';
 import { createTheme } from '../createTheme';
 import { act, renderHook } from '@testing-library/react-native';
 
-interface BasicColors extends ThemeColors {
-  primary: string;
-  background: string;
-}
-
-const basicTheme: ThemeDefinition<BasicColors> = {
-  name: 'basic',
-  fonts: DefaultFonts,
-  light: {
-    primary: 'basic-light-primary',
-    background: 'basic-light-background',
-  } satisfies BasicColors,
-  dark: {
-    primary: 'basic-dark-primary',
-    background: 'basic-dark-background',
-  } satisfies BasicColors,
-};
-
-const altTheme: ThemeDefinition<BasicColors> = {
-  name: 'basic-alt',
-  fonts: DefaultFonts,
-  light: {
-    primary: 'alt-light-primary',
-    background: 'alt-light-background',
-  },
-  dark: {
-    primary: 'alt-dark-primary',
-    background: 'alt-dark-background',
-  },
-};
-
 describe('useTheme', () => {
   it('provides the default theme', () => {
     const { useTheme } = createTheme<BasicColors>(basicTheme);
@@ -99,3 +68,34 @@ describe('useTheme', () => {
     expect(theme.colors.background).toBe(basicTheme.light.background);
   });
 });
+
+interface BasicColors extends ThemeColors {
+  primary: string;
+  background: string;
+}
+
+const basicTheme: ThemeDefinition<BasicColors> = {
+  name: 'basic',
+  fonts: DefaultFonts,
+  light: {
+    primary: 'basic-light-primary',
+    background: 'basic-light-background',
+  } satisfies BasicColors,
+  dark: {
+    primary: 'basic-dark-primary',
+    background: 'basic-dark-background',
+  } satisfies BasicColors,
+};
+
+const altTheme: ThemeDefinition<BasicColors> = {
+  name: 'basic-alt',
+  fonts: DefaultFonts,
+  light: {
+    primary: 'alt-light-primary',
+    background: 'alt-light-background',
+  },
+  dark: {
+    primary: 'alt-dark-primary',
+    background: 'alt-dark-background',
+  },
+};
