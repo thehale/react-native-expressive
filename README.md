@@ -1,16 +1,23 @@
-# react-native-expressive
+<div align="center">
 
+# React Native Expressive
+
+Utilities and UI components for cross-platform React Native apps
 <!-- BADGES -->
+[![Purely Personal](https://psas.dev/purely-personal/badge.svg)](https://psas.dev/purely-personal)
 [![](https://badgen.net/github/license/thehale/react-native-expressive)](https://github.com/thehale/react-native-expressive/blob/master/LICENSE)
 [![](https://badgen.net/badge/icon/Sponsor/pink?icon=github&label)](https://github.com/sponsors/thehale)
 [![Joseph Hale's software engineering blog](https://jhale.dev/badges/website.svg)](https://jhale.dev)
 [![](https://jhale.dev/badges/follow.svg)](https://www.linkedin.com/comm/mynetwork/discovery-see-all?usecase=PEOPLE_FOLLOWS&followMember=thehale)
+    
+    
+<img src="docs/img/kitchen-sink-ios-dark.png" width=250 />
+<img src="docs/img/kitchen-sink-android-light.png" width=250 />
 
-Utilities and UI components for cross-platform React Native apps
+</div>
 
 
 ## Installation
-
 
 ```sh
 npm install react-native-expressive
@@ -20,23 +27,18 @@ npm install react-native-expressive
 ## Usage
 
 
-```js
-import { multiply } from 'react-native-expressive';
-
-// ...
-
-const result = await multiply(3, 7);
-```
+See the [example app](example/src/App.tsx)
 
 
 ## Contributing
 
+- [👀 START HERE!](CONTRIBUTING.md#start-here)
 - [Development workflow](CONTRIBUTING.md#development-workflow)
 - [Sending a pull request](CONTRIBUTING.md#sending-a-pull-request)
 - [Code of conduct](CODE_OF_CONDUCT.md)
 
 ## License
-Copyright (c) 2022-2024 Joseph Hale, All Rights Reserved
+Copyright (c) 2025 Joseph Hale, All Rights Reserved
 
 Provided under the terms of the [Mozilla Public License, version 2.0](./LICENSE)
 

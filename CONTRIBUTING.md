@@ -1,8 +1,24 @@
 # Contributing
 
-Contributions are always welcome, no matter how large or small!
+🙏🙏🙏
 
-We want this community to be friendly and respectful to each other. Please follow it in all your interactions with the project. Before contributing, please read the [code of conduct](./CODE_OF_CONDUCT.md).
+## Start Here
+
+If you're here, I'm assuming that you've found this library useful! That's wonderful and it warms my soul 😊.
+
+Unlike many libraries, this one is primarily a [_personal library_](https://psas.dev/purely-personal/). It exists to simplify my efforts to maintain various mobile apps including [Binary Clock](https://github.com/thehale/BinaryClock), [Habit Sync for Todoist](https://github.com/thehale/HabitSync-for-Todoist), and [Speedcuber Timer](https://github.com/SpeedcuberOSS/speedcuber-timer). Broad utility is only a goal insofar as it makes my life easier when maintaining my apps.
+ 
+If you choose to offer contributions, please keep in mind the following:
+  - I can/will make breaking API changes whenever I want -- this library exists to serve my apps.
+  - You, however, cannot change the APIs -- don't break my apps! 🙏
+  - Well-written, automated tests are really important to me -- contributions that include good tests are taken much more seriously than those without.
+  - Eventually, I want to offer my apps on Windows and MacOS. 
+     - In general, adding dependencies (particularly native dependencies) is strongly discouraged. Anything Expo\* is strictly prohibited -- don't block my aspirations! 🙏
+     - Limit yourself to boring old JavaScript/TypeScript and the [core React Native components and APIs](https://reactnative.dev/docs/components-and-apis). e.g. use [`Animated`](https://reactnative.dev/docs/animated), and [`StyleSheet`](https://reactnative.dev/docs/stylesheet) instead of any third-party library/tool -- don't bloat my apps! 🙏
+    
+     <sub>\* Expo is a great tool for many projects -- including this library's [example app](example/package.json) -- but I prefer the control/flexibility of running bare React Native. Thus this library cannot _depend_ on anything Expo.</sub>
+ 
+Thank you for being considerate of my goals with this library! I look forward to seeing your contributions, be they large or small!
 
 ## Development workflow
 
