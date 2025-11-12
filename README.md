@@ -3,6 +3,7 @@
 # React Native Expressive
 
 Utilities and UI components for cross-platform React Native apps
+
 <!-- BADGES -->
 [![Purely Personal](https://psas.dev/purely-personal/badge.svg)](https://psas.dev/purely-personal)
 [![](https://badgen.net/github/license/thehale/react-native-expressive)](https://github.com/thehale/react-native-expressive/blob/master/LICENSE)
