@@ -1,6 +1,6 @@
 {
   "name": "react-native-expressive",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "description": "Utilities and UI components for cross-platform React Native apps",
   "main": "./lib/module/index.js",
   "types": "./lib/typescript/src/index.d.ts",
