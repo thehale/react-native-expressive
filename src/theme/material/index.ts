@@ -11,7 +11,9 @@ export type {
 } from './types';
 
 export { initMaterialTheme, useMaterialTheme } from './useMaterialTheme';
-export * as MaterialColors from './MaterialColors';
+
+import * as MaterialColors from './MaterialColors';
+export { MaterialColors };
 
 export { default as MaterialBlue } from './MaterialBlue';
 export { default as MaterialCyan } from './MaterialCyan';
