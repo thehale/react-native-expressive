@@ -9,7 +9,7 @@ import { TextInput as NativeTextInput, StyleSheet, View } from 'react-native';
 import Color from 'color';
 import { useMaterialTheme } from '../theme/material/useMaterialTheme';
 
-interface TextInputProps {
+export interface TextInputProps {
   value: string;
   onChangeText: (text: string) => void;
   placeholder?: string;

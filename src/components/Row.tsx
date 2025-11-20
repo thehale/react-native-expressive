@@ -8,7 +8,7 @@ import React from 'react';
 import { StyleSheet, View } from 'react-native';
 import type { StyleProp, ViewStyle } from 'react-native';
 
-interface RowProps {
+export interface RowProps {
   children: React.ReactNode;
   style?: StyleProp<ViewStyle>;
   itemStyle?: StyleProp<ViewStyle>;
