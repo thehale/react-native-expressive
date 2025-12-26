@@ -24,6 +24,69 @@ Utilities and UI components for cross-platform React Native apps
 npm install react-native-expressive
 ```
 
+<details>
+  <summary><strong>Submodule Usage</strong></summary>
+
+This library can also be used as a [Git
+Submodule](https://git-scm.com/book/en/v2/Git-Tools-Submodules), which can
+enable hot reloading of library codes changes.
+
+The tradeoff is the host app is then responsible for including the library's
+dependencies directly within the host's `package.json` and configuring any
+needed aliases to resolve library items from the submodule path.
+
+**Install the submodule**
+
+```bash
+git submodule add https://github.com/thehale/react-native-expressive.git lib/react-native-expressive
+```
+
+**Install the submodule's dependencies**
+
+```bash
+node ./lib/react-native-expressive/script/install-dependencies-in-host.js
+```
+
+**Configure Aliases**
+
+_babel.config.js_
+```diff
+module.exports = {
+  plugins: [
++    [
++      'module-resolver',
++      {
++        extensions: ['.ios.js', '.android.js', '.ios.jsx', '.android.jsx', '.js', '.jsx', '.json', '.ts', '.tsx'],
++        root: ['.'],
++        alias: {
++          'react-native-expressive': './lib/react-native-expressive/src',
++        },
++      },
++    ]
+  ]
+}
+```
+
+_tsconfig.json_
+```diff
+{
+  "compilerOptions": {
+    "paths": {
++      "react-native-expressive": ["./lib/react-native-expressive/src"]
+    }
+  }
+}
+```
+
+> [!TIP]
+> You may have to `npx react-native clean` the Metro and npm caches followed by an
+> app reinstall.
+
+> [!TIP]
+> Make sure your `react-native-expressive` submodule does **NOT** have a
+> `node_modules` folder as that can break Metro's module resolution.
+
+</details>
 
 ## Usage
 
