@@ -98,7 +98,7 @@ const DarkGreen: MaterialThemeColors = {
 };
 
 const MaterialGreen: MaterialThemeDefinition = {
-  name: 'material-green',
+  name: 'material/green',
   fonts: DefaultFonts,
   light: LightGreen,
   dark: DarkGreen,

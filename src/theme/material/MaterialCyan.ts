@@ -98,7 +98,7 @@ const DarkCyan: MaterialThemeColors = {
 };
 
 const MaterialCyan: MaterialThemeDefinition = {
-  name: 'material-cyan',
+  name: 'material/cyan',
   fonts: DefaultFonts,
   light: LightCyan,
   dark: DarkCyan,

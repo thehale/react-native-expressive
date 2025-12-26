@@ -98,7 +98,7 @@ const DarkBlue: MaterialThemeColors = {
 };
 
 const MaterialBlue: MaterialThemeDefinition = {
-  name: 'material-blue',
+  name: 'material/blue',
   fonts: DefaultFonts,
   light: LightBlue,
   dark: DarkBlue,

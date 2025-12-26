@@ -98,7 +98,7 @@ const DarkOrange: MaterialThemeColors = {
 };
 
 const MaterialOrange: MaterialThemeDefinition = {
-  name: 'material-orange',
+  name: 'material/orange',
   fonts: DefaultFonts,
   light: LightOrange,
   dark: DarkOrange,

@@ -98,7 +98,7 @@ const DarkYellow: MaterialThemeColors = {
 };
 
 const MaterialYellow: MaterialThemeDefinition = {
-  name: 'material-yellow',
+  name: 'material/yellow',
   fonts: DefaultFonts,
   light: LightYellow,
   dark: DarkYellow,

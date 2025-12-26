@@ -98,7 +98,7 @@ const DarkRed: MaterialThemeColors = {
 };
 
 const MaterialRed: MaterialThemeDefinition = {
-  name: 'material-red',
+  name: 'material/red',
   fonts: DefaultFonts,
   light: LightRed,
   dark: DarkRed,

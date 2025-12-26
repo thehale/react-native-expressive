@@ -98,7 +98,7 @@ const DarkPink: MaterialThemeColors = {
 };
 
 const MaterialPink: MaterialThemeDefinition = {
-  name: 'material-pink',
+  name: 'material/pink',
   fonts: DefaultFonts,
   light: LightPink,
   dark: DarkPink,
