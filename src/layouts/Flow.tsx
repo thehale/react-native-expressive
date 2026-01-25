@@ -17,7 +17,31 @@ export interface FlowProps {
 	rows: number;
 	columns: number;
 	children: React.ReactNode[];
-	flow: FlowDefinition;
+	flow?: FlowDefinition;
+}
+
+const DEFAULT_FLOW: FlowDefinition = {
+	origin: 'top-left',
+	direction: 'row',
+}
+
+function Flow(props: FlowProps) {
+	const flow = props.flow || DEFAULT_FLOW;
+	if (flow.direction === 'column') {
+		return (
+			<ColumnFlow {...props} origin={flow.origin}>
+				{props.children}
+			</ColumnFlow>
+		)
+	} else if (flow.direction === 'row') {
+		return (
+			<RowFlow {...props} origin={flow.origin}>
+				{props.children}
+			</RowFlow>
+		)
+	} else {
+		throw new Error(`Invalid flow direction: ${flow.direction}`);
+	}
 }
 
 export interface FlowDirectionProps {
@@ -25,24 +49,6 @@ export interface FlowDirectionProps {
 	columns: number;
 	children: React.ReactNode[];
 	origin: FlowDefinition['origin'];
-}
-
-function Flow(props: FlowProps) {
-	if (props.flow.direction === 'column') {
-		return (
-			<ColumnFlow {...props} origin={props.flow.origin}>
-				{props.children}
-			</ColumnFlow>
-		)
-	} else if (props.flow.direction === 'row') {
-		return (
-			<RowFlow {...props} origin={props.flow.origin}>
-				{props.children}
-			</RowFlow>
-		)
-	} else {
-		throw new Error(`Invalid flow direction: ${props.flow.direction}`);
-	}
 }
 
 function ColumnFlow(props: FlowDirectionProps) {

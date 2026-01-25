@@ -6,25 +6,10 @@
 
 import { View } from "react-native";
 import Measured, { useMeasurements } from "./Measured";
-import Flow, { type FlowDefinition } from "./Flow";
+import Flow, { type FlowProps } from "./Flow";
 import styles from "../styles";
 
-export interface SquaresProps {
-	rows: number;
-	columns: number;
-	flow?: FlowDefinition;
-	children: Iterable<React.ReactNode>;
-}
-
-const DEFAULT_FLOW: FlowDefinition = {
-	origin: 'top-left',
-	direction: 'column',
-}
-
-/**
- * Places its children into a grid of squares.
- */
-export default function Squares(props: SquaresProps) {
+export default function Squares(props: FlowProps) {
 	return (
 		<Measured>
 			<MeasuredSquares {...props} />
@@ -32,13 +17,12 @@ export default function Squares(props: SquaresProps) {
 	)
 }
 
-function MeasuredSquares(props: SquaresProps) {
+function MeasuredSquares(props: FlowProps) {
 	const squares = useSquares(props.rows, props.columns, Array.from(props.children));
-	const flow = props.flow || DEFAULT_FLOW;
 
 	return (
 		<View style={[styles.layout.centered, styles.layout.filled]}>
-			<Flow rows={props.rows} columns={props.columns} flow={flow}>
+			<Flow {...props}>
 				{squares}
 			</Flow>
 		</View>
