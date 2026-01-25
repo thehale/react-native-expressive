@@ -6,3 +6,4 @@
 
 export { default as Flow, type FlowProps, type FlowDirectionProps, type FlowDefinition } from "./Flow";
 export { default as Measured, useMeasurements } from "./Measured";
+export { default as Squares, type SquaresProps } from './Squares';
