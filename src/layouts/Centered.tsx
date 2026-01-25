@@ -6,6 +6,9 @@
 import React from "react"
 import { StyleSheet, View } from "react-native";
 
+/**
+ * A `View` that centers its children vertically and horizontally.
+ */
 export default function Centered(props: React.ComponentProps<typeof View>) {
 	return (
 		<View {...props} style={[props.style, styles.container]}>

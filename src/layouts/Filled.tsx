@@ -7,6 +7,11 @@
 import React from "react"
 import { StyleSheet, View } from "react-native";
 
+/**
+ * A `View` that fills all available space.
+ * 
+ * i.e. forces `{ width: '100%', height: '100%' }`
+ */
 export default function Filled(props: React.ComponentProps<typeof View>) {
 	return (
 		<View {...props} style={[props.style, styles.container]}>

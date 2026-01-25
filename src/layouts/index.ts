@@ -5,4 +5,5 @@
 // file, You can obtain one at https://mozilla.org/MPL/2.0/.
 
 export { default as Centered } from './Centered';
+export { default as Filled } from './Filled';
 export { default as Measured, useMeasurements } from "./Measured";

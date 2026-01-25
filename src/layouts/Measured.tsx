@@ -4,40 +4,63 @@
 // License, v. 2.0. If a copy of the MPL was not distributed with this
 // file, You can obtain one at https://mozilla.org/MPL/2.0/.
 
-import React, { createContext, useCallback, useContext, useRef, useState, type ComponentRef } from "react";
+import React, { createContext, useContext, useState } from "react";
 import { View } from "react-native";
+import Filled from "./Filled";
+
+/**
+ * Children of this component can `useMeasurements` to get the
+ * dimensions of this layout.
+ * 
+ * Use sparingly, as it requires an extra layout pass.
+ * 
+ * @example
+ * ```tsx
+ * import { Measured, useMeasurements } from 'react-native-expressive';
+ * 
+ * function Parent() {
+ *   return (
+ *     <Measured>
+ *       <Child />
+ *     </Measured>
+ *   );
+ * }
+ * 
+ * function Child() {
+ *   const { x, y, width, height } = useMeasurements();
+ *   // ...
+ * }
+ * ```
+ */
+export default function Measured({ children }: { children: React.ReactNode }) {
+	const [measurements, setMeasurements] = useState(UNMEASURED);
+	const measure: OnLayout = ({ nativeEvent }) => {
+		setMeasurements({ ...nativeEvent.layout, timestamp: Date.now() })
+	};
+
+	return (
+		<Filled onLayout={measure}>
+			{measurements.width > 0 && measurements.height > 0 && (
+				<MeasurementsContext value={measurements}>
+					{children}
+				</MeasurementsContext>
+			)}
+		</Filled>
+	);
+}
+
+export function useMeasurements() {
+	return useContext(MeasurementsContext);
+}
+
+const UNMEASURED = Object.freeze({ x: -1, y: -1, width: -1, height: -1, timestamp: -1 } satisfies Measurements);
+const MeasurementsContext = createContext<Measurements>(UNMEASURED);
 
 type Measurements = Readonly<{
 	x: number;
 	y: number;
 	width: number;
 	height: number;
+	timestamp: number;
 }>
-
-const UNMEASURED = Object.freeze({ x: -1, y: -1, width: -1, height: -1 } satisfies Measurements);
-
-const MeasurementsContext = createContext<Measurements>(UNMEASURED);
-
-export function useMeasurements() {
-	return useContext(MeasurementsContext);
-}
-
 type OnLayout = NonNullable<React.ComponentProps<typeof View>['onLayout']>;
-
-export default function Measured({ children }: { children: React.ReactNode }) {
-	const ref = useRef<ComponentRef<View>>(null);
-	const [measurements, setMeasurements] = useState(UNMEASURED);
-	const saveMeasurements = useCallback<OnLayout>(
-		({ nativeEvent }) => { setMeasurements(nativeEvent.layout) },
-		[setMeasurements]
-	);
-	return (
-		<Filled ref={ref} onLayout={saveMeasurements}>
-			{measurements.width > 0 && measurements.height > 0 && (
-				<MeasurementsContext.Provider value={measurements}>
-					{children}
-				</MeasurementsContext.Provider>
-			)}
-		</Filled>
-	);
-}
