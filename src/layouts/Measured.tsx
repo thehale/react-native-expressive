@@ -32,10 +32,12 @@ export default function Measured({ children }: { children: React.ReactNode }) {
 		[setMeasurements]
 	);
 	return (
-		<View ref={ref} onLayout={saveMeasurements}>
-			<MeasurementsContext.Provider value={measurements}>
-				{children}
-			</MeasurementsContext.Provider>
-		</View>
+		<Filled ref={ref} onLayout={saveMeasurements}>
+			{measurements.width > 0 && measurements.height > 0 && (
+				<MeasurementsContext.Provider value={measurements}>
+					{children}
+				</MeasurementsContext.Provider>
+			)}
+		</Filled>
 	);
 }
