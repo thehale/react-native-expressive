@@ -9,3 +9,4 @@ export * from './layouts';
 export * from './theme';
 export * from './stores';
 export * from './settings';
+export { default as styles } from './styles';

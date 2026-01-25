@@ -4,4 +4,17 @@
 // License, v. 2.0. If a copy of the MPL was not distributed with this
 // file, You can obtain one at https://mozilla.org/MPL/2.0/.
 
-export { default as Measured, useMeasurements } from "./Measured";
+import { StyleSheet } from "react-native";
+
+const styles = StyleSheet.create({
+	centered: {
+		justifyContent: 'center',
+		alignItems: 'center',
+	},
+	filled: {
+		width: '100%',
+		height: '100%',
+	}
+})
+
+export default styles;

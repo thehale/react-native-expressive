@@ -6,7 +6,7 @@
 
 import React, { createContext, useContext, useState } from "react";
 import { View } from "react-native";
-import Filled from "./Filled";
+import styles from "./styles";
 
 /**
  * Children of this component can `useMeasurements` to get the
@@ -39,13 +39,13 @@ export default function Measured({ children }: { children: React.ReactNode }) {
 	};
 
 	return (
-		<Filled onLayout={measure}>
+		<View style={styles.filled} onLayout={measure}>
 			{measurements.width > 0 && measurements.height > 0 && (
 				<MeasurementsContext value={measurements}>
 					{children}
 				</MeasurementsContext>
 			)}
-		</Filled>
+		</View>
 	);
 }
 
