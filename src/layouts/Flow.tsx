@@ -6,7 +6,7 @@
 
 import Column from "./Column";
 import Row from "./Row";
-import { range } from "../utils/iteration";
+import { sequence } from "../utils/iteration";
 
 export interface FlowDefinition {
 	origin: 'top-left' | 'top-right' | 'bottom-left' | 'bottom-right';
@@ -56,9 +56,9 @@ function ColumnFlow(props: FlowDirectionProps) {
 
 	return (
 		<Row reverse={origin.endsWith("right")}>
-			{range(0, columns).map((column) => (
+			{sequence(columns).map(column => (
 				<Column key={column} reverse={origin.startsWith("bottom")}>
-					{range(0, rows).map((row) => children[column * rows + row])}
+					{sequence(rows).map(row => children[column * rows + row])}
 				</Column>
 			))}
 		</Row>
@@ -70,9 +70,9 @@ function RowFlow(props: FlowDirectionProps) {
 
 	return (
 		<Column reverse={origin.startsWith("bottom")}>
-			{range(0, rows).map((row) => (
+			{sequence(rows).map(row => (
 				<Row key={row} reverse={origin.endsWith("right")}>
-					{range(0, columns).map((column) => children[row * columns + column])}
+					{sequence(columns).map(column => children[row * columns + column])}
 				</Row>
 			))}
 		</Column>

@@ -8,6 +8,7 @@ import { View } from "react-native";
 import Measured, { useMeasurements } from "./Measured";
 import Flow, { type FlowProps } from "./Flow";
 import styles from "../styles";
+import { sequence } from "../utils/iteration";
 
 export default function Squares(props: FlowProps) {
 	return (
@@ -32,7 +33,7 @@ function MeasuredSquares(props: FlowProps) {
 function useSquares(rows: number, columns: number, children: React.ReactNode[]) {
 	const { width, height } = useMeasurements();
 	const length = Math.floor(Math.min(width / columns, height / rows));
-	return new Array(rows * columns).fill(null).map((_, i) => (
+	return sequence(rows * columns).map(i => (
 		<Square key={i} size={length}>
 			{children[i]}
 		</Square>

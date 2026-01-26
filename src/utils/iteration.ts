@@ -10,3 +10,7 @@
 export function range(start: number, end: number) {
 	return Array.from({ length: end - start }).map((_, index) => index + start);
 }
+
+export function sequence(count: number) {
+	return range(0, count);
+}
