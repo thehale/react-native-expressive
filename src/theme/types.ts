@@ -6,6 +6,8 @@
 
 import type { ThemeFonts } from './fonts/types';
 
+export type ColorScheme = 'light' | 'dark' | 'system';
+
 export interface ThemeColors extends Record<string, string | ThemeColors> {}
 
 export type Theme<C extends ThemeColors> = {

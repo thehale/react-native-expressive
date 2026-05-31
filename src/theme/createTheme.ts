@@ -8,9 +8,8 @@ import { createSettings } from '../settings/createSettings';
 import type { Settings, Setting } from '../settings/types';
 import KeyValueStore from '../stores/KeyValueStore';
 import { useColorScheme as useSystemColorScheme } from 'react-native';
-import type { Theme, ThemeColors, ThemeDefinition } from './types';
+import type { ColorScheme, Theme, ThemeColors, ThemeDefinition } from './types';
 
-type ColorScheme = 'light' | 'dark' | 'system';
 const COLOR_SCHEMES = ['light', 'dark', 'system'] as const;
 const DEFAULT_COLOR_SCHEME = 'system';
 const DEFAULT_SYSTEM_COLOR_SCHEME = 'light';
