@@ -10,59 +10,59 @@ const readline = require('node:readline');
 const { exec } = require('child_process');
 
 function main() {
-	const thisScriptPath = process.argv[1];
-	const thisPackageJsonPath = path.join(
-		path.dirname(thisScriptPath),
-		'..',
-		'package.json'
-	);
-	const thisPackageJson = JSON.parse(
-		fs.readFileSync(thisPackageJsonPath, 'utf-8')
-	);
-	
-	const dependencies = Object.entries(thisPackageJson.dependencies).map(
-		([packageName, version]) => `${packageName}@${version}`
-	);
-	const command = `npm install --save ${dependencies.join(' ')}`;
-	
-	const devDependencies = ["babel-plugin-module-resolver@^5.0.2"]
-	const devCommand = `npm install --save-dev ${devDependencies.join(' ')}`;
+  const thisScriptPath = process.argv[1];
+  const thisPackageJsonPath = path.join(
+    path.dirname(thisScriptPath),
+    '..',
+    'package.json'
+  );
+  const thisPackageJson = JSON.parse(
+    fs.readFileSync(thisPackageJsonPath, 'utf-8')
+  );
 
-	console.log("How to install dependencies:");
-	console.log();
-	console.log(`  ${command}`);
-	console.log(`  ${devCommand}`);
-	console.log();
-	
-	const rl = readline.createInterface({
-		input: process.stdin,
-		output: process.stdout,
-	});
-	rl.question(`Run now? (Y/n)`, (answer) => {
-		if (['y', ''].includes(answer.toLowerCase())) {
-			console.log('-'.repeat(40));
-			(async () => {
-				await shell(command)
-				await shell(devCommand)
-			})();
-		}
-		rl.close();
-	});
+  const dependencies = Object.entries(thisPackageJson.dependencies).map(
+    ([packageName, version]) => `${packageName}@${version}`
+  );
+  const command = `npm install --save ${dependencies.join(' ')}`;
+
+  const devDependencies = ['babel-plugin-module-resolver@^5.0.2'];
+  const devCommand = `npm install --save-dev ${devDependencies.join(' ')}`;
+
+  console.log('How to install dependencies:');
+  console.log();
+  console.log(`  ${command}`);
+  console.log(`  ${devCommand}`);
+  console.log();
+
+  const rl = readline.createInterface({
+    input: process.stdin,
+    output: process.stdout,
+  });
+  rl.question(`Run now? (Y/n)`, (answer) => {
+    if (['y', ''].includes(answer.toLowerCase())) {
+      console.log('-'.repeat(40));
+      (async () => {
+        await shell(command);
+        await shell(devCommand);
+      })();
+    }
+    rl.close();
+  });
 }
 
 function shell(command) {
-	return new Promise((resolve) => {
-		exec(command, (error, stdout, stderr) => {
-			console.log(stdout);
-			if (error) {
-				console.error(`Error executing command: ${error.message}`);
-			}
-			if (stderr) {
-				console.error(`stderr: ${stderr}`);
-			}
-			resolve();
-		});
-	});
+  return new Promise((resolve) => {
+    exec(command, (error, stdout, stderr) => {
+      console.log(stdout);
+      if (error) {
+        console.error(`Error executing command: ${error.message}`);
+      }
+      if (stderr) {
+        console.error(`stderr: ${stderr}`);
+      }
+      resolve();
+    });
+  });
 }
 
 main();
