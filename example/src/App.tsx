@@ -2,8 +2,7 @@ import { StyleSheet, ScrollView } from 'react-native';
 import Buttons from './Buttons';
 import Typography from './Typography';
 import Themes from './Themes';
-import { useMaterialTheme } from 'react-native-expressive';
-import { Divider } from 'react-native-expressive';
+import { useMaterialTheme, Divider, s } from 'react-native-expressive';
 
 export default function App() {
   const { theme } = useMaterialTheme();
@@ -12,9 +11,9 @@ export default function App() {
       style={[styles.container, { backgroundColor: theme.colors.background }]}
     >
       <Themes />
-      <Divider />
+      <Divider gap={s.space.default} />
       <Buttons />
-      <Divider />
+      <Divider gap={s.space.default} />
       <Typography />
     </ScrollView>
   );
