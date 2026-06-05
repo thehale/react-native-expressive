@@ -10,6 +10,7 @@ import Text, { type TextProps } from './Text';
 
 import React from 'react';
 import { useMaterialTheme } from '../theme/material/useMaterialTheme';
+import { radius, size, space } from '../styles';
 
 export interface CardProps {
   title?: string | React.ReactNode;
@@ -23,7 +24,7 @@ export default function Card(props: CardProps) {
   const colors: ViewStyle = {
     backgroundColor: theme.colors.surface,
     borderColor: theme.colors.outlineVariant,
-    borderWidth: 1,
+    borderWidth: size.outline,
     elevation: 5,
   };
   return (
@@ -98,8 +99,8 @@ function _Section(props: {
 const styles = StyleSheet.create({
   container: {
     width: '100%',
-    padding: 16,
-    borderRadius: 8,
+    padding: space.double,
+    borderRadius: radius.default,
     shadowOffset: {
       width: 0,
       height: 2,
@@ -108,12 +109,12 @@ const styles = StyleSheet.create({
     shadowRadius: 3.84,
     elevation: 5,
   },
-  title: { marginBottom: 8 },
-  subtitle: { marginBottom: 8 },
-  content: { marginBottom: 8 },
+  title: { marginBottom: space.default },
+  subtitle: { marginBottom: space.default },
+  content: { marginBottom: space.default },
   actions: {
     flexDirection: 'row',
     justifyContent: 'flex-end',
-    gap: 8,
+    gap: space.default,
   },
 });

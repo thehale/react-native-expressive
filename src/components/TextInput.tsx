@@ -8,6 +8,7 @@ import { TextInput as NativeTextInput, StyleSheet, View } from 'react-native';
 
 import Color from 'color';
 import { useMaterialTheme } from '../theme/material/useMaterialTheme';
+import { radius, size, space } from '../styles';
 
 export interface TextInputProps {
   value: string;
@@ -52,13 +53,13 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
-    borderRadius: 8,
-    gap: 8,
-    paddingHorizontal: 8,
-    borderBottomWidth: 1,
+    borderRadius: radius.default,
+    gap: space.default,
+    paddingHorizontal: space.default,
+    borderBottomWidth: size.outline,
   },
   input: {
-    borderRadius: 8,
+    borderRadius: radius.default,
     flex: 1,
   },
 });

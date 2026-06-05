@@ -7,6 +7,7 @@
 import { StyleSheet, View } from 'react-native';
 
 import { useMaterialTheme } from '../theme/material/useMaterialTheme';
+import { size } from '../styles';
 
 interface DividerProps {
   gap?: number;
@@ -27,6 +28,6 @@ export default function Divider({ gap = 0 }: DividerProps) {
 const styles = StyleSheet.create({
   container: {
     width: '100%',
-    height: 1,
+    height: size.outline,
   },
 });

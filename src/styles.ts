@@ -17,3 +17,18 @@ export const filled = style({
   width: '100%',
   height: '100%',
 } as const);
+
+export const size = Object.freeze({
+  outline: 1,
+});
+
+export const radius = Object.freeze({
+  default: 8,
+});
+
+export const space = Object.freeze({
+  quarter: 2,
+  half: 4,
+  default: 8,
+  double: 16,
+});

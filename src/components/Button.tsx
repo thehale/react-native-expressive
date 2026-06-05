@@ -15,6 +15,7 @@ import type { Optional } from '../utils/typing';
 import Text from './Text';
 import type { MaterialTheme } from '../theme/material/types';
 import { useMaterialTheme } from '../theme/material/useMaterialTheme';
+import { radius, size, space } from '../styles';
 
 type ButtonMode = 'text' | 'contained' | 'outlined' | 'tonal' | 'elevated';
 type ButtonIntent = 'normal' | 'danger';
@@ -101,7 +102,7 @@ function buttonModeColors(
       backgroundColor: 'transparent',
       textColor: theme.colors.primary,
       borderColor: theme.colors.outline,
-      borderWidth: 1,
+      borderWidth: size.outline,
     },
     tonal: {
       backgroundColor: theme.colors.secondaryContainer,
@@ -139,7 +140,7 @@ function buttonDangerColors(
       backgroundColor: 'transparent',
       textColor: theme.colors.error,
       borderColor: theme.colors.error,
-      borderWidth: 1,
+      borderWidth: size.outline,
     },
     tonal: {
       backgroundColor: theme.colors.errorContainer,
@@ -177,7 +178,7 @@ function buttonDisabledColors(
       backgroundColor: 'transparent',
       textColor: theme.colors.onSurfaceDisabled,
       borderColor: theme.colors.surfaceDisabled,
-      borderWidth: 1,
+      borderWidth: size.outline,
     },
     tonal: {
       backgroundColor: theme.colors.surfaceDisabled,
@@ -195,11 +196,15 @@ function buttonDisabledColors(
 }
 
 const styles = StyleSheet.create({
-  container: { margin: 2, padding: 8, borderRadius: 8 },
+  container: {
+    margin: space.quarter,
+    padding: space.default,
+    borderRadius: radius.default,
+  },
   contents: {
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-evenly',
-    gap: 8,
+    gap: space.default,
   },
 });
