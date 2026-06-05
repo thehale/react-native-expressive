@@ -8,11 +8,18 @@ import { StyleSheet, View } from 'react-native';
 
 import { useMaterialTheme } from '../theme/material/useMaterialTheme';
 
-export default function Divider() {
+interface DividerProps {
+  gap?: number;
+}
+
+export default function Divider({ gap = 0 }: DividerProps) {
   const { theme } = useMaterialTheme();
   return (
     <View
-      style={[styles.container, { backgroundColor: theme.colors.outline }]}
+      style={[
+        styles.container,
+        { backgroundColor: theme.colors.outline, marginVertical: gap },
+      ]}
     />
   );
 }
