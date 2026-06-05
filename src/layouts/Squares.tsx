@@ -7,7 +7,7 @@
 import { View } from 'react-native';
 import Measured, { useMeasurements } from './Measured';
 import Flow, { type FlowProps } from './Flow';
-import styles from '../styles';
+import { centered, filled } from '../styles';
 import { sequence } from '../utils/iteration';
 
 export default function Squares(props: FlowProps) {
@@ -26,7 +26,7 @@ function MeasuredSquares(props: FlowProps) {
   );
 
   return (
-    <View style={[styles.layout.centered, styles.layout.filled]}>
+    <View style={[centered, filled]}>
       <Flow {...props}>{squares}</Flow>
     </View>
   );

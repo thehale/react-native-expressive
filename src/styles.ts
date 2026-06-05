@@ -4,8 +4,16 @@
 // License, v. 2.0. If a copy of the MPL was not distributed with this
 // file, You can obtain one at https://mozilla.org/MPL/2.0/.
 
-import layout from './layouts/styles';
+import { StyleSheet, type ViewStyle } from 'react-native';
 
-const styles = { layout };
+const style = <S extends ViewStyle>(s: S) => StyleSheet.create({ s: s }).s;
 
-export default styles;
+export const centered = style({
+  justifyContent: 'center',
+  alignItems: 'center',
+});
+
+export const filled = style({
+  width: '100%',
+  height: '100%',
+} as const);
