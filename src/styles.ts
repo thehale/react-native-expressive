@@ -32,3 +32,11 @@ export const space = Object.freeze({
   default: 8,
   double: 16,
 });
+
+export const s = {
+  centered,
+  filled,
+  size,
+  radius,
+  space,
+};
