@@ -31,8 +31,7 @@ This library can also be used as a [Git
 Submodule](https://git-scm.com/book/en/v2/Git-Tools-Submodules), which can
 enable hot reloading of library codes changes.
 
-The tradeoff is the host app is then responsible for including the library's
-dependencies directly within the host's `package.json` and configuring any
+The tradeoff is the host app is then responsible configuring any
 needed aliases to resolve library items from the submodule path.
 
 **Install the submodule**
@@ -41,14 +40,11 @@ needed aliases to resolve library items from the submodule path.
 git submodule add https://github.com/thehale/react-native-expressive.git lib/react-native-expressive
 ```
 
-**Install the submodule's dependencies**
-
-```bash
-node ./lib/react-native-expressive/script/install-dependencies-in-host.js
-```
-
 **Configure Aliases**
 
+```bash
+npm install --save-dev babel-plugin-module-resolver@^5.0.2
+```
 _babel.config.js_
 ```diff
 module.exports = {
