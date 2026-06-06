@@ -1,3 +1,4 @@
+// @ts-nocheck
 import { RgbaColor } from "../types";
 
 export const invert = (rgba: RgbaColor): RgbaColor => ({

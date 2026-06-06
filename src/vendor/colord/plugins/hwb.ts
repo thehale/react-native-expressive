@@ -1,3 +1,4 @@
+// @ts-nocheck
 import { HwbaColor } from "../types";
 import { Plugin } from "../extend";
 import { parseHwba, rgbaToHwba, roundHwba } from "../colorModels/hwb";

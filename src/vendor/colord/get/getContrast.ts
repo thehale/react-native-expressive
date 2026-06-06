@@ -1,3 +1,4 @@
+// @ts-nocheck
 import { RgbaColor } from "../types";
 import { getLuminance } from "./getLuminance";
 

@@ -1,3 +1,4 @@
+// @ts-nocheck
 import { Colord } from "./colord";
 import { parsers } from "./parse";
 import { Parsers } from "./types";

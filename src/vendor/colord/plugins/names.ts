@@ -1,3 +1,4 @@
+// @ts-nocheck
 import { ParseFunction, RgbaColor } from "../types";
 import { Plugin } from "../extend";
 

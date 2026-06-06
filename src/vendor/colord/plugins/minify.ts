@@ -1,3 +1,4 @@
+// @ts-nocheck
 import { Colord } from "../colord";
 import { Plugin } from "../extend";
 import { round } from "../helpers";

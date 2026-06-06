@@ -1,3 +1,4 @@
+// @ts-nocheck
 import { linearizeRgbChannel } from "../colorModels/rgb";
 import { RgbaColor } from "../types";
 

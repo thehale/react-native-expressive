@@ -1,3 +1,4 @@
+// @ts-nocheck
 import { RgbaColor } from "../types";
 
 export const changeAlpha = (rgba: RgbaColor, a: number): RgbaColor => ({

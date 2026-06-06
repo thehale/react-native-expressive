@@ -1,3 +1,4 @@
+// @ts-nocheck
 import { CmykaColor } from "../types";
 import { Plugin } from "../extend";
 import { parseCmyka, roundCmyka, rgbaToCmyka } from "../colorModels/cmyk";

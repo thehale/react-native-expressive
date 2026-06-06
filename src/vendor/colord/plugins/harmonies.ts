@@ -1,3 +1,4 @@
+// @ts-nocheck
 import { Plugin } from "../extend";
 
 export type HarmonyType =

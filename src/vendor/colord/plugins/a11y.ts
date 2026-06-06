@@ -1,3 +1,4 @@
+// @ts-nocheck
 import { AnyColor } from "../types";
 import { Plugin } from "../extend";
 import { getContrast } from "../get/getContrast";

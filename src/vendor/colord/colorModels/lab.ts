@@ -1,3 +1,4 @@
+// @ts-nocheck
 import { RgbaColor, LabaColor, InputObject } from "../types";
 import { ALPHA_PRECISION } from "../constants";
 import { clamp, isPresent, round } from "../helpers";

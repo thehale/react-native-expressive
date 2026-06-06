@@ -1,3 +1,4 @@
+// @ts-nocheck
 import { RgbaColor } from "../types";
 import { round } from "../helpers";
 import { roundRgba } from "./rgb";

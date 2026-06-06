@@ -1,3 +1,4 @@
+// @ts-nocheck
 /**
  * We used to work with 2 digits after the decimal point, but it wasn't accurate enough,
  * so the library produced colors that were perceived differently.

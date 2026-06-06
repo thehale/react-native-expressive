@@ -1,3 +1,4 @@
+// @ts-nocheck
 import { ANGLE_UNITS } from "./constants";
 
 export const isPresent = (value: unknown): boolean => {

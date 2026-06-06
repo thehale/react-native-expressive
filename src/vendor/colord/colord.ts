@@ -1,3 +1,4 @@
+// @ts-nocheck
 import { Input, AnyColor, RgbaColor, HslaColor, HsvaColor } from "./types";
 import { round } from "./helpers";
 import { ALPHA_PRECISION } from "./constants";

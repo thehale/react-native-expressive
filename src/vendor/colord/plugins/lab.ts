@@ -1,3 +1,4 @@
+// @ts-nocheck
 import { LabaColor, AnyColor } from "../types";
 import { Plugin } from "../extend";
 import { parseLaba, roundLaba, rgbaToLaba } from "../colorModels/lab";

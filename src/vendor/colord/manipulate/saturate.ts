@@ -1,3 +1,4 @@
+// @ts-nocheck
 import { rgbaToHsla } from "../colorModels/hsl";
 import { HslaColor, RgbaColor } from "../types";
 import { clamp } from "../helpers";

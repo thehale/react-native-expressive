@@ -1,3 +1,4 @@
+// @ts-nocheck
 import { clampLaba, labaToRgba, rgbaToLaba } from "../colorModels/lab";
 import { RgbaColor } from "../types";
 

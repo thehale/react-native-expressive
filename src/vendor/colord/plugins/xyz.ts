@@ -1,3 +1,4 @@
+// @ts-nocheck
 import { XyzaColor } from "../types";
 import { Plugin } from "../extend";
 import { parseXyza, rgbaToXyza, roundXyza } from "../colorModels/xyz";

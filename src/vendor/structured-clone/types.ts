@@ -1,3 +1,4 @@
+// @ts-nocheck
 export const VOID = -1
 export const PRIMITIVE = 0
 export const ARRAY = 1

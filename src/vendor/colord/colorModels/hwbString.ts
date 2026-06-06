@@ -1,3 +1,4 @@
+// @ts-nocheck
 import { parseHue } from "../helpers";
 import { RgbaColor } from "../types";
 import { clampHwba, rgbaToHwba, hwbaToRgba, roundHwba } from "./hwb";

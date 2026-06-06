@@ -1,3 +1,4 @@
+// @ts-nocheck
 export { colord, Colord } from "./colord";
 export { extend, Plugin } from "./extend";
 export { getFormat } from "./parse";

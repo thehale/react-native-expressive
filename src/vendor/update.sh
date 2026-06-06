@@ -15,6 +15,8 @@ main() {
         https://github.com/omgovich/colord/archive/refs/heads/master.zip \
         src \
         colord
+
+    ensure-directive "// @ts-nocheck" $(find . -type f -name "*.ts")
 }
 
 fetch_zip_subfolder() {
@@ -34,6 +36,19 @@ fetch_zip_subfolder() {
 	mkdir -p "$output_dir"
 	cp -R "$src_dir"/. "$output_dir"/
 	rm -rf "$tmp_dir"
+}
+
+ensure-directive() {
+  local directive="$1"
+  local files=("${@:2}")
+  
+  for file in "${files[@]}"; do
+    if [[ -f "$file" ]]; then
+      if ! head -n 1 "$file" | grep -Fq "$directive"; then
+        sed -i.bak "1s|^|$directive\n|" "$file" && rm -f "${file}.bak"
+      fi
+    fi
+  done
 }
 
 main

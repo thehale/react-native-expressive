@@ -1,3 +1,4 @@
+// @ts-nocheck
 import { RgbaColor } from "../types";
 import { clampCmyka, cmykaToRgba, rgbaToCmyka, roundCmyka } from "./cmyk";
 

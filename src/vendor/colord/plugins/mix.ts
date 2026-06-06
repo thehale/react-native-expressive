@@ -1,3 +1,4 @@
+// @ts-nocheck
 import { AnyColor } from "../types";
 import { Plugin } from "../extend";
 import { mix } from "../manipulate/mix";

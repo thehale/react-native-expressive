@@ -1,3 +1,4 @@
+// @ts-nocheck
 import { Colord } from "./colord";
 
 export const random = (): Colord => {

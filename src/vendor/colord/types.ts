@@ -1,3 +1,4 @@
+// @ts-nocheck
 export type RgbColor = {
   r: number;
   g: number;

@@ -1,3 +1,4 @@
+// @ts-nocheck
 import { LchaColor } from "../types";
 import { Plugin } from "../extend";
 import { parseLcha, roundLcha, rgbaToLcha } from "../colorModels/lch";

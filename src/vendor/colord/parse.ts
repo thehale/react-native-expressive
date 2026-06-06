@@ -1,3 +1,4 @@
+// @ts-nocheck
 import { Parser, Parsers, ParseResult, Input, InputObject, Format } from "./types";
 import { parseHex } from "./colorModels/hex";
 import { parseRgba } from "./colorModels/rgb";
