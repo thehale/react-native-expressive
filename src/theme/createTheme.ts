@@ -65,7 +65,12 @@ export function createTheme<
       currentScheme === 'dark' ? settings.theme.dark : settings.theme.light;
 
     return {
-      theme: { fonts: settings.theme.fonts, colors } as Theme<C>,
+      theme: {
+        name: settings.theme.name,
+        scheme: currentScheme,
+        fonts: settings.theme.fonts,
+        colors,
+      } as Theme<C>,
       setTheme: (theme: T) => updateSettings({ theme }),
       scheme: settings.scheme,
       setScheme: (scheme: ColorScheme) => updateSettings({ scheme }),

@@ -9,11 +9,20 @@
  *   `mode="elevated" disabled`: The text is highlighted lighter than the rest of the button
  */
 
-import { Pressable, StyleSheet, View, type ViewStyle } from 'react-native';
+import {
+  Pressable,
+  StyleSheet,
+  View,
+  type TextStyle,
+  type ViewStyle,
+} from 'react-native';
 
 import type { Optional } from '../utils/typing';
 import Text from './Text';
-import type { MaterialTheme } from '../theme/material/types';
+import type {
+  MaterialTheme,
+  MaterialThemeColors,
+} from '../theme/material/types';
 import { useMaterialTheme } from '../theme/material/useMaterialTheme';
 import { radius, size, space } from '../styles';
 
@@ -44,155 +53,240 @@ const propDefaults: Pick<ButtonProps, PropsWithDefaults> = {
 export default function Button(args: Optional<ButtonProps, PropsWithDefaults>) {
   const { theme } = useMaterialTheme();
   const props: ButtonProps = { ...propDefaults, ...args };
-  const modeColors = buttonModeColors(theme)[props.mode];
-  const dangerColors = buttonDangerColors(theme)[props.mode];
-  const disabledColors = buttonDisabledColors(theme)[props.mode];
   return (
     <Pressable
       onPress={props.onPress}
       disabled={props.disabled}
-      style={[
-        styles.container,
-        modeColors,
-        props.intent === 'danger' && dangerColors,
-        props.disabled && disabledColors,
-      ]}
+      style={[styles.container, containerStyles(theme, props)]}
     >
       <View style={styles.contents}>
         {props.before}
-        <Text
-          style={[
-            { color: modeColors.textColor },
-            props.intent === 'danger' && { color: dangerColors.textColor },
-            props.disabled && { color: disabledColors.textColor },
-          ]}
-        >
-          {props.children}
-        </Text>
+        <Text style={textStyles(theme, props)}>{props.children}</Text>
         {props.after}
       </View>
     </Pressable>
   );
 }
 
-interface ButtonColors extends ViewStyle {
+function containerStyles(theme: MaterialTheme, props: ButtonProps): ViewStyle {
+  const key = `${theme.name}:${theme.scheme}:${props.mode}:${props.intent}:${props.disabled}:container`;
+  return cachedStyle(key, () => {
+    const mode = modeStyles(theme.colors, props.mode);
+    const disabled = props.disabled
+      ? disabledStyles(theme.colors, props.mode)
+      : null;
+    const danger =
+      props.intent === 'danger' ? dangerStyles(theme.colors, props.mode) : null;
+    return {
+      backgroundColor:
+        disabled?.backgroundColor ??
+        danger?.backgroundColor ??
+        mode.backgroundColor,
+      borderColor:
+        disabled?.borderColor ?? danger?.borderColor ?? mode.borderColor,
+      borderWidth:
+        disabled?.borderWidth ?? danger?.borderWidth ?? mode.borderWidth,
+      elevation: disabled?.elevation ?? danger?.elevation ?? mode.elevation,
+    };
+  });
+}
+
+function textStyles(theme: MaterialTheme, props: ButtonProps): TextStyle {
+  const key = `${theme.name}:${theme.scheme}:${props.mode}:${props.intent}:${props.disabled}:text`;
+  return cachedStyle(key, () => {
+    const mode = modeTextColor(theme.colors, props.mode);
+    const disabled =
+      props.disabled && disabledTextColor(theme.colors, props.mode);
+    const danger =
+      props.intent === 'danger' && dangerTextColor(theme.colors, props.mode);
+    return { color: disabled || danger || mode };
+  });
+}
+
+function cachedStyle<T extends ViewStyle | TextStyle>(
+  key: string,
+  compute: () => T
+): T {
+  if (!stylesCache.has(key)) {
+    stylesCache.set(key, StyleSheet.create({ _: compute() })._);
+  }
+  return stylesCache.get(key) as T;
+}
+
+const stylesCache = new Map<string, ViewStyle | TextStyle>();
+
+type ButtonStyles = {
   backgroundColor: string;
-  textColor: string;
   borderColor: string;
   borderWidth: number;
+  elevation?: number;
+};
+
+function modeStyles(
+  colors: MaterialThemeColors,
+  mode: ButtonMode
+): ButtonStyles {
+  switch (mode) {
+    case 'text':
+      return {
+        backgroundColor: 'transparent',
+        borderColor: 'transparent',
+        borderWidth: 0,
+      };
+    case 'contained':
+      return {
+        backgroundColor: colors.primary,
+        borderColor: 'transparent',
+        borderWidth: 0,
+      };
+    case 'outlined':
+      return {
+        backgroundColor: 'transparent',
+        borderColor: colors.outline,
+        borderWidth: size.outline,
+      };
+    case 'tonal':
+      return {
+        backgroundColor: colors.secondaryContainer,
+        borderColor: 'transparent',
+        borderWidth: 0,
+      };
+    case 'elevated':
+      return {
+        backgroundColor: colors.elevation.level2,
+        borderColor: 'transparent',
+        borderWidth: 0,
+        elevation: 2,
+      };
+  }
 }
 
-function buttonModeColors(
-  theme: MaterialTheme
-): Record<ButtonMode, ButtonColors> {
-  return {
-    text: {
-      backgroundColor: 'transparent',
-      textColor: theme.colors.primary,
-      borderColor: 'transparent',
-      borderWidth: 0,
-    },
-    contained: {
-      backgroundColor: theme.colors.primary,
-      textColor: theme.colors.onPrimary,
-      borderColor: 'transparent',
-      borderWidth: 0,
-    },
-    outlined: {
-      backgroundColor: 'transparent',
-      textColor: theme.colors.primary,
-      borderColor: theme.colors.outline,
-      borderWidth: size.outline,
-    },
-    tonal: {
-      backgroundColor: theme.colors.secondaryContainer,
-      textColor: theme.colors.onSecondaryContainer,
-      borderColor: 'transparent',
-      borderWidth: 0,
-    },
-    elevated: {
-      backgroundColor: theme.colors.elevation.level2,
-      textColor: theme.colors.primary,
-      borderColor: 'transparent',
-      borderWidth: 0,
-      elevation: 2,
-    },
-  };
+function dangerStyles(
+  colors: MaterialThemeColors,
+  mode: ButtonMode
+): ButtonStyles {
+  switch (mode) {
+    case 'text':
+      return {
+        backgroundColor: 'transparent',
+        borderColor: 'transparent',
+        borderWidth: 0,
+      };
+    case 'contained':
+      return {
+        backgroundColor: colors.error,
+        borderColor: 'transparent',
+        borderWidth: 0,
+      };
+    case 'outlined':
+      return {
+        backgroundColor: 'transparent',
+        borderColor: colors.error,
+        borderWidth: size.outline,
+      };
+    case 'tonal':
+      return {
+        backgroundColor: colors.errorContainer,
+        borderColor: 'transparent',
+        borderWidth: 0,
+      };
+    case 'elevated':
+      return {
+        backgroundColor: colors.errorContainer,
+        borderColor: 'transparent',
+        borderWidth: 0,
+        elevation: 2,
+      };
+  }
 }
 
-function buttonDangerColors(
-  theme: MaterialTheme
-): Record<ButtonMode, ButtonColors> {
-  return {
-    text: {
-      backgroundColor: 'transparent',
-      textColor: theme.colors.error,
-      borderColor: 'transparent',
-      borderWidth: 0,
-    },
-    contained: {
-      backgroundColor: theme.colors.error,
-      textColor: theme.colors.onError,
-      borderColor: 'transparent',
-      borderWidth: 0,
-    },
-    outlined: {
-      backgroundColor: 'transparent',
-      textColor: theme.colors.error,
-      borderColor: theme.colors.error,
-      borderWidth: size.outline,
-    },
-    tonal: {
-      backgroundColor: theme.colors.errorContainer,
-      textColor: theme.colors.onErrorContainer,
-      borderColor: 'transparent',
-      borderWidth: 0,
-    },
-    elevated: {
-      backgroundColor: theme.colors.errorContainer,
-      textColor: theme.colors.onErrorContainer,
-      borderColor: 'transparent',
-      borderWidth: 0,
-      elevation: 2,
-    },
-  };
+function disabledStyles(
+  colors: MaterialThemeColors,
+  mode: ButtonMode
+): ButtonStyles {
+  switch (mode) {
+    case 'text':
+      return {
+        backgroundColor: 'transparent',
+        borderColor: 'transparent',
+        borderWidth: 0,
+      };
+    case 'contained':
+      return {
+        backgroundColor: colors.surfaceDisabled,
+        borderColor: 'transparent',
+        borderWidth: 0,
+      };
+    case 'outlined':
+      return {
+        backgroundColor: 'transparent',
+        borderColor: colors.surfaceDisabled,
+        borderWidth: size.outline,
+      };
+    case 'tonal':
+      return {
+        backgroundColor: colors.surfaceDisabled,
+        borderColor: 'transparent',
+        borderWidth: 0,
+      };
+    case 'elevated':
+      return {
+        backgroundColor: colors.surfaceDisabled,
+        borderColor: 'transparent',
+        borderWidth: 0,
+      };
+  }
 }
 
-function buttonDisabledColors(
-  theme: MaterialTheme
-): Record<ButtonMode, ButtonColors> {
-  return {
-    text: {
-      backgroundColor: 'transparent',
-      textColor: theme.colors.onSurfaceDisabled,
-      borderColor: 'transparent',
-      borderWidth: 0,
-    },
-    contained: {
-      backgroundColor: theme.colors.surfaceDisabled,
-      textColor: theme.colors.onSurfaceDisabled,
-      borderColor: 'transparent',
-      borderWidth: 0,
-    },
-    outlined: {
-      backgroundColor: 'transparent',
-      textColor: theme.colors.onSurfaceDisabled,
-      borderColor: theme.colors.surfaceDisabled,
-      borderWidth: size.outline,
-    },
-    tonal: {
-      backgroundColor: theme.colors.surfaceDisabled,
-      textColor: theme.colors.onSurfaceDisabled,
-      borderColor: 'transparent',
-      borderWidth: 0,
-    },
-    elevated: {
-      backgroundColor: theme.colors.surfaceDisabled,
-      textColor: theme.colors.onSurfaceDisabled,
-      borderColor: 'transparent',
-      borderWidth: 0,
-    },
-  };
+function modeTextColor(colors: MaterialThemeColors, mode: ButtonMode): string {
+  switch (mode) {
+    case 'text':
+      return colors.primary;
+    case 'contained':
+      return colors.onPrimary;
+    case 'outlined':
+      return colors.primary;
+    case 'tonal':
+      return colors.onSecondaryContainer;
+    case 'elevated':
+      return colors.primary;
+  }
+}
+
+function dangerTextColor(
+  colors: MaterialThemeColors,
+  mode: ButtonMode
+): string {
+  switch (mode) {
+    case 'text':
+      return colors.error;
+    case 'contained':
+      return colors.onError;
+    case 'outlined':
+      return colors.error;
+    case 'tonal':
+      return colors.onErrorContainer;
+    case 'elevated':
+      return colors.onErrorContainer;
+  }
+}
+
+function disabledTextColor(
+  colors: MaterialThemeColors,
+  mode: ButtonMode
+): string {
+  switch (mode) {
+    case 'text':
+      return colors.onSurfaceDisabled;
+    case 'contained':
+      return colors.onSurfaceDisabled;
+    case 'outlined':
+      return colors.onSurfaceDisabled;
+    case 'tonal':
+      return colors.onSurfaceDisabled;
+    case 'elevated':
+      return colors.onSurfaceDisabled;
+  }
 }
 
 const styles = StyleSheet.create({
