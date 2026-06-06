@@ -67,6 +67,7 @@ export function createTheme<
     return {
       theme: { fonts: settings.theme.fonts, colors } as Theme<C>,
       setTheme: (theme: T) => updateSettings({ theme }),
+      scheme: settings.scheme,
       setScheme: (scheme: ColorScheme) => updateSettings({ scheme }),
       resetTheme: resetSettings,
     };
