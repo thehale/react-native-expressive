@@ -12,8 +12,8 @@ Utilities and UI components for cross-platform React Native apps
 [![](https://jhale.dev/badges/follow.svg)](https://www.linkedin.com/comm/mynetwork/discovery-see-all?usecase=PEOPLE_FOLLOWS&followMember=thehale)
     
     
-<img src="docs/img/kitchen-sink-ios-dark.png" width=250 />
-<img src="docs/img/kitchen-sink-android-light.png" width=250 />
+<img src="docs/img/kitchen-sink-ios-light.png" width=236 />
+<img src="docs/img/kitchen-sink-android-dark.jpg" width=250 />
 
 </div>
 
