@@ -4,7 +4,12 @@
 // License, v. 2.0. If a copy of the MPL was not distributed with this
 // file, You can obtain one at https://mozilla.org/MPL/2.0/.
 
-import { TextInput as NativeTextInput, StyleSheet, View } from 'react-native';
+import {
+  TextInput as NativeTextInput,
+  Platform,
+  StyleSheet,
+  View,
+} from 'react-native';
 
 import { colord } from '../vendor/colord';
 import { useMaterialTheme } from '../theme/material/useMaterialTheme';
@@ -55,6 +60,9 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     borderRadius: radius.default,
     gap: space.default,
+    paddingVertical: Platform.select({
+      ios: space.default + space.half,
+    }),
     paddingHorizontal: space.default,
     borderBottomWidth: size.outline,
   },
