@@ -4,6 +4,8 @@
 // License, v. 2.0. If a copy of the MPL was not distributed with this
 // file, You can obtain one at https://mozilla.org/MPL/2.0/.
 
+import { useMemo } from 'react';
+
 import { createSettings } from '../settings/createSettings';
 import type { Settings, Setting } from '../settings/types';
 import KeyValueStore from '../stores/KeyValueStore';
@@ -61,21 +63,26 @@ export function createTheme<
       settings.scheme === 'system'
         ? (systemColorScheme ?? DEFAULT_SYSTEM_COLOR_SCHEME)
         : settings.scheme;
-    const colors =
-      currentScheme === 'dark' ? settings.theme.dark : settings.theme.light;
 
-    return {
-      theme: {
-        name: settings.theme.name,
-        scheme: currentScheme,
-        fonts: settings.theme.fonts,
-        colors,
-      } as Theme<C>,
-      setTheme: (theme: T) => updateSettings({ theme }),
-      scheme: settings.scheme,
-      setScheme: (scheme: ColorScheme) => updateSettings({ scheme }),
-      resetTheme: resetSettings,
-    };
+    return useMemo(
+      () => ({
+        theme: {
+          name: settings.theme.name,
+          scheme: currentScheme,
+          fonts: settings.theme.fonts,
+          colors:
+            currentScheme === 'dark'
+              ? settings.theme.dark
+              : settings.theme.light,
+        } as Theme<C>,
+        setTheme: (t: T) => updateSettings({ theme: t }),
+        scheme: settings.scheme,
+        setScheme: (s: ColorScheme) => updateSettings({ scheme: s }),
+        resetTheme: resetSettings,
+      }),
+      // eslint-disable-next-line react-hooks/exhaustive-deps
+      [settings.theme.name, currentScheme, settings.scheme]
+    );
   }
 
   return { initTheme, useTheme };
