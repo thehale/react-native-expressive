@@ -5,7 +5,7 @@
 // file, You can obtain one at https://mozilla.org/MPL/2.0/.
 
 import { StyleSheet, View } from 'react-native';
-import { Text, Button, Row } from 'react-native-expressive';
+import { Text, Button, Row, s } from 'react-native-expressive';
 
 export default function Buttons() {
   const modes = ['text', 'contained', 'outlined', 'tonal', 'elevated'] as const;
@@ -43,7 +43,7 @@ export default function Buttons() {
 
 const styles = StyleSheet.create({
   container: { flex: 1 },
-  header: { flexDirection: 'row', marginVertical: 8 },
+  header: { flexDirection: 'row', marginVertical: s.space.default },
   mode: { flex: 1, textAlign: 'left' },
   intent: { flex: 2, textAlign: 'center' },
   button: { flex: 1 },

@@ -6,13 +6,12 @@
 
 import { StyleSheet, View } from 'react-native';
 import {
+  s,
   Button,
   Segment,
   Segmented,
   Text,
   type ColorScheme,
-} from 'react-native-expressive';
-import {
   useMaterialTheme,
   MaterialBlue,
   MaterialCyan,
@@ -67,6 +66,6 @@ export default function Themes() {
 }
 
 const styles = StyleSheet.create({
-  container: { gap: 16, marginBlock: 16 },
-  section: { flexDirection: 'row', flexWrap: 'wrap', gap: 8 },
+  container: { gap: s.space.double, marginBlock: s.space.double },
+  section: { flexDirection: 'row', flexWrap: 'wrap', gap: s.space.default },
 });
