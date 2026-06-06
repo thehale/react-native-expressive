@@ -4,7 +4,10 @@
 // License, v. 2.0. If a copy of the MPL was not distributed with this
 // file, You can obtain one at https://mozilla.org/MPL/2.0/.
 
-import { debounce, type DebouncedFunc } from 'lodash';
+import {
+  debounce,
+  type DebouncedFunction,
+} from '../vendor/es-toolkit/debounce';
 
 export interface ExternalKeyValueStore {
   get: (key: string) => Promise<string | null>;
@@ -15,7 +18,7 @@ export default class KeyValueStore {
   private external: ExternalKeyValueStore;
   private setters = new Map<
     string,
-    DebouncedFunc<(value: string) => Promise<void>>
+    DebouncedFunction<(value: string) => Promise<void>>
   >();
 
   constructor(external?: ExternalKeyValueStore) {
@@ -26,7 +29,7 @@ export default class KeyValueStore {
     if (!this.setters.has(key)) {
       const setter = async (newVal: string) =>
         await this.external.set(key, newVal);
-      this.setters.set(key, debounce(setter, 1000, { trailing: true }));
+      this.setters.set(key, debounce(setter, 1000, { edges: ['trailing'] }));
       return setter(value);
     } else {
       return this.setters.get(key)!(value);
