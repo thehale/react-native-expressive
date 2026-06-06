@@ -9,6 +9,7 @@ import type { StyleProp, TextStyle } from 'react-native';
 
 import type { MaterialTheme } from '../theme/material/types';
 import { useMaterialTheme } from '../theme/material/useMaterialTheme';
+import { createStyleCache } from '../utils/createStyleCache';
 
 type TextVariant = keyof MaterialTheme['fonts'];
 type TextSize = keyof MaterialTheme['fonts'][TextVariant];
@@ -19,18 +20,32 @@ export interface TextProps {
   style?: StyleProp<TextStyle>;
 }
 
+const { cachedStyle } = createStyleCache();
+
 export default function Text(props: TextProps) {
   const { theme } = useMaterialTheme();
-  const colors: TextStyle = { color: theme.colors.onSurface };
-  const [variant, size] = (props.variant ?? 'body').split(' ') as [
-    TextVariant,
-    TextSize | undefined,
-  ];
   return (
-    <NativeText
-      style={[theme.fonts[variant][size ?? 'medium'], colors, props.style]}
-    >
+    <NativeText style={[textStyle(theme, props.variant), props.style]}>
       {props.children}
     </NativeText>
+  );
+}
+
+function textStyle(
+  theme: MaterialTheme,
+  variant: TextProps['variant']
+): TextStyle {
+  return cachedStyle(
+    `${theme.name}:${theme.scheme}:${variant ?? 'body'}`,
+    () => {
+      const [_variant, size] = (variant ?? 'body').split(' ') as [
+        TextVariant,
+        TextSize | undefined,
+      ];
+      return {
+        ...theme.fonts[_variant][size ?? 'medium'],
+        color: theme.colors.onSurface,
+      };
+    }
   );
 }
