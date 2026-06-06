@@ -5,7 +5,13 @@
 // file, You can obtain one at https://mozilla.org/MPL/2.0/.
 
 import { StyleSheet, View } from 'react-native';
-import { Button, Text } from 'react-native-expressive';
+import {
+  Button,
+  Segment,
+  Segmented,
+  Text,
+  type ColorScheme,
+} from 'react-native-expressive';
 import {
   useMaterialTheme,
   MaterialBlue,
@@ -18,10 +24,18 @@ import {
 } from 'react-native-expressive';
 
 export default function Themes() {
-  const { setTheme, setScheme, resetTheme } = useMaterialTheme();
+  const { setTheme, scheme, setScheme, resetTheme } = useMaterialTheme();
   return (
     <View style={styles.container}>
       <Text variant="headline">Theme Picker</Text>
+      <Segmented
+        value={scheme}
+        onChange={(value) => setScheme(value as ColorScheme)}
+      >
+        <Segment value="light">Light</Segment>
+        <Segment value="system">System</Segment>
+        <Segment value="dark">Dark</Segment>
+      </Segmented>
       <View style={styles.section}>
         <Button mode="contained" onPress={() => setTheme(MaterialBlue)}>
           Blue
@@ -43,17 +57,6 @@ export default function Themes() {
         </Button>
         <Button mode="contained" onPress={() => setTheme(MaterialYellow)}>
           Yellow
-        </Button>
-      </View>
-      <View style={styles.section}>
-        <Button mode="outlined" onPress={() => setScheme('light')}>
-          Light
-        </Button>
-        <Button mode="outlined" onPress={() => setScheme('dark')}>
-          Dark
-        </Button>
-        <Button mode="outlined" onPress={() => setScheme('system')}>
-          System
         </Button>
         <Button mode="text" onPress={() => resetTheme()}>
           Reset

@@ -9,5 +9,11 @@ export { default as Card, type CardProps } from './Card';
 export { default as Dialog, type DialogProps } from './Dialog';
 export { default as Divider } from './Divider';
 export { default as Row, type RowProps } from './Row';
+export {
+  Segmented,
+  type SegmentedProps,
+  Segment,
+  type SegmentProps,
+} from './Segmented';
 export { default as Text, type TextProps } from './Text';
 export { default as TextInput, type TextInputProps } from './TextInput';
