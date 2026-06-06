@@ -5,8 +5,8 @@
 // file, You can obtain one at https://mozilla.org/MPL/2.0/.
 
 import { StyleSheet, View } from 'react-native';
-import type { StyleProp, ViewStyle } from 'react-native';
-import Text, { type TextProps } from './Text';
+import type { ViewStyle } from 'react-native';
+import Text from './Text';
 
 import React from 'react';
 import { createStyleCache } from '../utils/createStyleCache';
@@ -27,9 +27,9 @@ export default function Card(props: CardProps) {
   const { theme } = useMaterialTheme();
   return (
     <View style={[styles.container, cardStyles(theme)]}>
-      <Title>{props.title}</Title>
-      <Subtitle>{props.subtitle}</Subtitle>
-      <Content>{props.content}</Content>
+      {props.title && <Title>{props.title}</Title>}
+      {props.subtitle && <Subtitle>{props.subtitle}</Subtitle>}
+      {props.content && <Content>{props.content}</Content>}
       {props.actions instanceof Actions ? (
         props.actions
       ) : (
@@ -49,58 +49,43 @@ function cardStyles(theme: MaterialTheme): ViewStyle {
 
 function Title(props: { children: string | React.ReactNode }) {
   return (
-    <_Section containerStyle={styles.title} textVariant="title">
-      {props.children}
-    </_Section>
+    <View style={styles.title}>
+      {typeof props.children === 'string'
+        ? <Text variant="title">{props.children}</Text>
+        : props.children}
+    </View>
   );
 }
 
 function Subtitle(props: { children: string | React.ReactNode }) {
   return (
-    <_Section containerStyle={styles.subtitle} textVariant="title small">
-      {props.children}
-    </_Section>
+    <View style={styles.subtitle}>
+      {typeof props.children === 'string'
+        ? <Text variant="title small">{props.children}</Text>
+        : props.children}
+    </View>
   );
 }
 
 function Content(props: { children: string | React.ReactNode }) {
-  return <_Section containerStyle={styles.content}>{props.children}</_Section>;
-}
-
-function Actions(props: { children: React.ReactNode }) {
   return (
-    <_Section containerStyle={styles.actions} textVariant="label">
-      {props.children}
-    </_Section>
+    <View style={styles.content}>
+      {typeof props.children === 'string'
+        ? <Text>{props.children}</Text>
+        : props.children}
+    </View>
   );
 }
 
-Card.Actions = Actions;
-
-function _Section(props: {
-  children: string | React.ReactNode;
-  containerStyle?: StyleProp<ViewStyle>;
-  textVariant?: TextProps['variant'];
-}) {
-  if (!props.children) return null;
-  else {
-    const children = Array.isArray(props.children)
-      ? props.children
-      : [props.children];
-    const inners = children
-      .filter((i) => !!i)
-      .map((child, index) =>
-        typeof child === 'string' ? (
-          <Text key={index} variant={props.textVariant}>
-            {child}
-          </Text>
-        ) : (
-          <View key={index}>{child}</View>
-        )
-      );
-    return <View style={props.containerStyle}>{inners}</View>;
+function Actions(props: { children: React.ReactNode }) {
+  if (!props.children) {
+    return null;
+  } else {
+    return <View style={styles.actions}>{props.children}</View>;
   }
 }
+
+Card.Actions = Actions;
 
 const styles = StyleSheet.create({
   container: {
