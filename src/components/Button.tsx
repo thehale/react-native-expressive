@@ -18,6 +18,7 @@ import {
 } from 'react-native';
 
 import type { Optional } from '../utils/typing';
+import { createStyleCache } from '../utils/createStyleCache';
 import Text from './Text';
 import type {
   MaterialTheme,
@@ -68,6 +69,8 @@ export default function Button(args: Optional<ButtonProps, PropsWithDefaults>) {
   );
 }
 
+const { cachedStyle } = createStyleCache();
+
 function containerStyles(theme: MaterialTheme, props: ButtonProps): ViewStyle {
   const key = `${theme.name}:${theme.scheme}:${props.mode}:${props.intent}:${props.disabled}:container`;
   return cachedStyle(key, () => {
@@ -102,18 +105,6 @@ function textStyles(theme: MaterialTheme, props: ButtonProps): TextStyle {
     return { color: disabled || danger || mode };
   });
 }
-
-function cachedStyle<T extends ViewStyle | TextStyle>(
-  key: string,
-  compute: () => T
-): T {
-  if (!stylesCache.has(key)) {
-    stylesCache.set(key, StyleSheet.create({ _: compute() })._);
-  }
-  return stylesCache.get(key) as T;
-}
-
-const stylesCache = new Map<string, ViewStyle | TextStyle>();
 
 type ButtonStyles = {
   backgroundColor: string;
