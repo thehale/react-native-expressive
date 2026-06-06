@@ -9,7 +9,9 @@ import type { StyleProp, ViewStyle } from 'react-native';
 import Text, { type TextProps } from './Text';
 
 import React from 'react';
+import { createStyleCache } from '../utils/createStyleCache';
 import { useMaterialTheme } from '../theme/material/useMaterialTheme';
+import type { MaterialTheme } from '../theme/material/types';
 import { radius, size, space } from '../styles';
 
 export interface CardProps {
@@ -19,16 +21,12 @@ export interface CardProps {
   actions?: React.ReactNode;
 }
 
+const { cachedStyle } = createStyleCache();
+
 export default function Card(props: CardProps) {
   const { theme } = useMaterialTheme();
-  const colors: ViewStyle = {
-    backgroundColor: theme.colors.surface,
-    borderColor: theme.colors.outlineVariant,
-    borderWidth: size.outline,
-    elevation: 5,
-  };
   return (
-    <View style={[styles.container, colors]}>
+    <View style={[styles.container, cardStyles(theme)]}>
       <Title>{props.title}</Title>
       <Subtitle>{props.subtitle}</Subtitle>
       <Content>{props.content}</Content>
@@ -39,6 +37,14 @@ export default function Card(props: CardProps) {
       )}
     </View>
   );
+}
+
+function cardStyles(theme: MaterialTheme): ViewStyle {
+  return cachedStyle(`${theme.name}:${theme.scheme}`, () => ({
+    backgroundColor: theme.colors.surface,
+    borderColor: theme.colors.outlineVariant,
+    borderWidth: size.outline,
+  }));
 }
 
 function Title(props: { children: string | React.ReactNode }) {
