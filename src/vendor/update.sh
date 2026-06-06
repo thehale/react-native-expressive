@@ -10,6 +10,11 @@ main() {
         https://github.com/antfu-collective/structured-clone-es/archive/refs/heads/main.zip \
         src \
         structured-clone
+
+    fetch_zip_subfolder \
+        https://github.com/omgovich/colord/archive/refs/heads/master.zip \
+        src \
+        colord
 }
 
 fetch_zip_subfolder() {

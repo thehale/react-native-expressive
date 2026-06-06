@@ -6,7 +6,7 @@
 
 import { TextInput as NativeTextInput, StyleSheet, View } from 'react-native';
 
-import Color from 'color';
+import { colord } from '../vendor/colord';
 import { useMaterialTheme } from '../theme/material/useMaterialTheme';
 import { radius, size, space } from '../styles';
 
@@ -34,9 +34,9 @@ export default function TextInput(props: TextInputProps) {
       <NativeTextInput
         style={[styles.input, { color: theme.colors.onSecondaryContainer }]}
         placeholder={`${props.placeholder}...`}
-        placeholderTextColor={Color(theme.colors.onSecondaryContainer)
-          .fade(0.5)
-          .string()}
+        placeholderTextColor={colord(theme.colors.onSecondaryContainer)
+          .alpha(0.5)
+          .toRgbString()}
         value={props.value}
         onChangeText={props.onChangeText}
         autoCapitalize="none"
