@@ -4,7 +4,7 @@
 // License, v. 2.0. If a copy of the MPL was not distributed with this
 // file, You can obtain one at https://mozilla.org/MPL/2.0/.
 
-import structuredClone from '@ungap/structured-clone';
+import { structuredClone } from '../../vendor/structured-clone';
 
 export class NamedSubscriberStore<State extends Record<string, any>> {
   state: State;
